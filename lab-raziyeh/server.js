@@ -35,6 +35,15 @@ const server = http.createServer(function(req, res) {
     res.write(cowsay.say({text:'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
     res.end();
   }
+
+  if (req.method === 'POST') {
+    parseBody(req, function(err){
+      if (err) return console.error(err);
+      res.writeHead(200,{'Content-Type': 'text/plain'});
+      res.write(cowsay.say({text:req.body.text}));
+      res.end();
+    });
+  }
 });
 
 server.listen(PORT, function() {
