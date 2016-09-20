@@ -23,12 +23,12 @@ In your root server, type in the command **"node server.js"** in your terminal.
 In another Terminal :
 
 - For Get Request:
-    - http localhost:3000/ : will respond with a simple hello world text
-    - http localhost:3000/cowsay text=='some text' : will respond with cowsay 
-    
+    > http localhost:3000/ : will respond with a simple hello world text
+    > http localhost:3000/cowsay text=='some text' : will respond with cowsay 
+
 - For POST Request:
-    - we need a json file in root directory like : daya.json with a simple json string
-    - cat data.json | http post localhost:3000/cowsay : will show the json data using cowsay
+    > we need a json file in root directory like : daya.json with a simple json string
+    > cat data.json | http post localhost:3000/cowsay : will show the json data using cowsay
         
 
 
