@@ -30,6 +30,10 @@ const server = http.createServer(function(req, res) {
     res.writeHead(200);
     res.write(cowsay.say({text:req.url.query.text}));
     res.end();
+  } else if (req.method === 'GET' && req.url.pathname === '/cowsay' && !req.url.query.text){
+    res.writeHead(400);
+    res.write(cowsay.say({text:'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
+    res.end();
   }
 });
 
