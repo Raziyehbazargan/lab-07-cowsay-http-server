@@ -20,9 +20,15 @@ const server = http.createServer(function(req, res) {
   req.url = url.parse(req.url);
   req.url.query = queryString.parse(req.url.query);
 
-  if (req.method === 'GET' && req.url.path === '/') {
+  if (req.method === 'GET' && req.url.pathname === '/') {
     res.writeHead( 200, { 'Content-Type': 'text/plain'});
     res.write('Hello World');
+    res.end();
+  }
+
+  if(req.method === 'GET' && req.url.pathname === '/cowsay' && req.url.query.text) {
+    res.writeHead(200);
+    res.write(cowsay.say({text:req.url.query.text}));
     res.end();
   }
 });
