@@ -23,7 +23,9 @@ const server = http.createServer(function(req, res) {
 //Method : GET
   if (req.method === 'GET') {
     if(req.url.pathname === '/') {
-      res.writeHead( 200, { 'Content-Type': 'text/plain'});
+      res.writeHead( 200, {
+        'Content-Type': 'text/plain'
+      });
       res.write('Hello World');
       res.end();
     }
@@ -32,11 +34,11 @@ const server = http.createServer(function(req, res) {
         res.writeHead(200);
         res.write(cowsay.say({text:req.url.query.text}));
         res.end();
-      } else {
-        res.writeHead(400);
-        res.write(cowsay.say({text:'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
-        res.end();
+        return;
       }
+      res.writeHead(400);
+      res.write(cowsay.say({text:'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
+      res.end();
     }
   }
 
@@ -45,14 +47,16 @@ const server = http.createServer(function(req, res) {
     parseBody(req, function(err){
       if (err) return console.error(err);
       if(req.body.text){
-        res.writeHead(200,{'Content-Type': 'text/plain'});
+        res.writeHead(200,{
+          'Content-Type': 'text/plain'
+        });
         res.write(cowsay.say({text:req.body.text}));
         res.end();
-      } else {
-        res.writeHead(400,{'Content-Type': 'text/plain'});
-        res.write(cowsay.say({text:'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
-        res.end();
+        return;
       }
+      res.writeHead(400,{'Content-Type': 'text/plain'});
+      res.write(cowsay.say({text:'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
+      res.end();
     });
   }
 });
